@@ -13,7 +13,7 @@ We would like to officially thank [WarmShao](https://github.com/warmshao) for hi
 
 **WebUI:** is built on Gradio and supports most of `browser-use` functionalities. This UI is designed to be user-friendly and enables easy interaction with the browser agent.
 
-**Expanded LLM Support:** We've integrated support for various Large Language Models (LLMs), including: Gemini, OpenAI, Azure OpenAI, Anthropic, DeepSeek, Ollama etc. And we plan to add support for even more models in the future.
+**Expanded LLM Support:** We've integrated support for various Large Language Models (LLMs), including: Google, OpenAI, Azure OpenAI, Anthropic, DeepSeek, Ollama etc. And we plan to add support for even more models in the future.
 
 **Custom Browser Support:** You can use your own browser with our tool, eliminating the need to re-login to sites or deal with other authentication challenges. This feature also supports high-definition screen recording.
 
@@ -57,11 +57,6 @@ Activate the virtual environment:
 - macOS/Linux:
 ```bash
 source .venv/bin/activate
-```
-alternative activation for Windows:
-
-```bash
-.\.venv\Scripts\Activate
 ```
 
 #### Step 3: Install Dependencies
@@ -121,6 +116,7 @@ docker compose up --build
 # Or run with persistent browser (browser stays open between AI tasks)
 CHROME_PERSISTENT_SESSION=true docker compose up --build
 ```
+
 
 4. Access the Application:
 - Web Interface: Open `http://localhost:7788` in your browser
@@ -188,7 +184,11 @@ CHROME_PERSISTENT_SESSION=true docker compose up --build
      VNC_PASSWORD=your_vnc_password  # Optional, defaults to "vncpassword"
      ```
 
-2. **Browser Persistence Modes:**
+2. **Platform Support:**
+   - Supports both AMD64 and ARM64 architectures
+   - For ARM64 systems (e.g., Apple Silicon Macs), the container will automatically use the appropriate image
+
+3. **Browser Persistence Modes:**
    - **Default Mode (CHROME_PERSISTENT_SESSION=false):**
      - Browser opens and closes with each AI task
      - Clean state for each interaction
@@ -200,12 +200,13 @@ CHROME_PERSISTENT_SESSION=true docker compose up --build
      - Allows viewing previous AI interactions
      - Set in `.env` file or via environment variable when starting container
 
-3. **Viewing Browser Interactions:**
+4. **Viewing Browser Interactions:**
    - Access the noVNC viewer at `http://localhost:6080/vnc.html`
    - Enter the VNC password (default: "vncpassword" or what you set in VNC_PASSWORD)
+   - Direct VNC access available on port 5900 (mapped to container port 5901)
    - You can now see all browser interactions in real-time
 
-4. **Container Management:**
+5. **Container Management:**
    ```bash
    # Start with persistent browser
    CHROME_PERSISTENT_SESSION=true docker compose up -d
